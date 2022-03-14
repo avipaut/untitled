@@ -13,6 +13,7 @@ public class data_user {
     }
         static Connection connection;
         void open () {
+
             try {
                 connection = DriverManager.getConnection("jdbc:sqlite:project.db");
 
@@ -21,6 +22,8 @@ public class data_user {
                 System.out.println("Error");
             }
         }
+
+
         public static void select() {
 
             try {
@@ -43,25 +46,21 @@ public class data_user {
                         }
                         if (rs.next()){
                             isUserExist = true;
-
                         }
                     }
                 }
-
-
                 if (isUserExist){
                     System.out.println();
-
-
-
                 }
             }
             catch (Exception e){
                 System.out.println("sdasd");
             }
+        }// Выводит все оценки из базы данных
 
-        }
+
     void close() {
+
         try {
             connection.close();
         } catch (Exception e) {

@@ -16,6 +16,7 @@ public class Students {
     }
     static Connection connection;
      void open () {
+
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
 
@@ -23,21 +24,25 @@ public class Students {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
             System.out.println("Error");
         }
-    }
+    }//Конектится в базе данных
+
+
     void close() {
+
         try {
             connection.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
+    }//Закрывает базу данных
+
+
     public static void select() {
+
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-
             Scanner check = new Scanner(System.in);
             System.out.println("Enter your name: ");
-
             String name = check.nextLine();
             boolean isUserExist = false;
             assert connection != null;
@@ -58,28 +63,26 @@ public class Students {
                     }
                     if (rs.next()){
                         isUserExist = true;
-
                     }
                 }
             }
             if (isUserExist){
-                System.out.println();
-
-
-
+                System.out.println("provlem");
             }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
+    }//Выводит предметы и среднее арифметическое значение оценок
 
-    }
+
     static double getAvarage(String marksStr) {
+
         String[] marks = marksStr.split(",");
         double avarage = 0;
         for (String mark : marks) {
             avarage += Double.parseDouble(mark);
         }
         return avarage / marks.length;
-    }
+    }//Вычисляет среднее арифметическое значение
 }

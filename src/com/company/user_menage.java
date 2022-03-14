@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class user_menage {
     public static void main(String[] args) {
+
         user_menage program = new user_menage();
         program.open();
         program.close();
@@ -15,6 +16,7 @@ public class user_menage {
     Connection connection;
 
     void open() {
+
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
 
@@ -32,9 +34,10 @@ public class user_menage {
         if (choose == 2) {
             register_users();
         }
-    }
+    }//Выбор войти или регистр...
 
     void close() {
+
         try {
             connection.close();
         } catch (Exception e) {
@@ -58,7 +61,7 @@ public class user_menage {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
+    }// добавляет логин и пароль в базу
 
     public void enter_users() {
         try {
@@ -88,7 +91,7 @@ public class user_menage {
             System.out.println(e.getMessage());
         }
 
-    }
+    }//Проверяет логин и пароль в базе данных
 
 
     }

@@ -24,10 +24,10 @@ public class zdf {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
             System.out.println("Error");
         }
-
     }
 
     public void delete_user() {
+
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
 
@@ -41,7 +41,9 @@ public class zdf {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
+    }// Удаляет пользователей
+
+
     void close() {
         try {
             connection.close();
@@ -49,6 +51,8 @@ public class zdf {
             System.out.println(e.getMessage());
         }
     }
+
+
     public static void task() {
 
         try {
@@ -71,23 +75,15 @@ public class zdf {
                     }
                     if (rs.next()){
                         isUserExist = true;
-
                     }
                 }
             }
-
-
             if (isUserExist){
                 System.out.println();
-
-
-
             }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-
-    }
-
+    }//выводи задания заданные на определённую дату
 }

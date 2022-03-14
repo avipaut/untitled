@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
         Main program = new Main();
         program.open();
         program.marks();
@@ -16,6 +17,7 @@ public class Main {
     Connection connection;
 
     void open() {
+
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
 
@@ -34,6 +36,7 @@ public class Main {
     }
 
     public void marks() {
+
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
 
@@ -57,5 +60,5 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
+    }//Добавляет оценки в выбранный предмет 
 }
