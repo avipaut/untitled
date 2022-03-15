@@ -84,5 +84,5 @@ public class Students {
             avarage += Double.parseDouble(mark);
         }
         return avarage / marks.length;
-    }//Вычисляет среднее арифметическое значение
+    }//Вычисляет среднее арифметическое значение dfdffd
 }
