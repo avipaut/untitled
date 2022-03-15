@@ -39,7 +39,6 @@ public class Main {
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-
             Scanner scanner = new Scanner(System.in);
             String name,marks,subject;
             System.out.print("Enter students name: ");
