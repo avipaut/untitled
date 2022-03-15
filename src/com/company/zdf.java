@@ -136,7 +136,7 @@ public class zdf {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-    }//выводи задания заданные на определённую дату 'nj hjsfd
+    }//выводи задания заданные на определённую дату
 
 
 }
