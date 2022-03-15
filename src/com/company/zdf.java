@@ -32,7 +32,6 @@ public class zdf {
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter your name :");
             String name = scanner.nextLine();

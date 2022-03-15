@@ -28,9 +28,9 @@ public class data_user {
 
             try {
                 connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-                Scanner check = new Scanner(System.in);
+                Scanner sc = new Scanner(System.in);
                 System.out.println("Enter your name: ");
-                String name = check.nextLine();
+                String name = sc.nextLine();
                 boolean isUserExist = false;
                 try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, SoftwareEngineering, Logic, German FROM items WHERE students = '" + name + "'")){
                     try (ResultSet rs = ps.executeQuery()) {
@@ -54,7 +54,7 @@ public class data_user {
                 }
             }
             catch (Exception e){
-                System.out.println("sdasd");
+                System.out.println("Extension"+e);
             }
         }// Выводит все оценки из базы данных
 

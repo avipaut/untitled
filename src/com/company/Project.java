@@ -9,10 +9,10 @@ public class Project {
 
     public static void main(String[] args) {
         Project program = new Project();
-        program.enter_users();
-//        program.register_users();
 //        program.open();
-//        program.close();
+//        program.enter_users();
+        program.register_users();
+        program.close();
 
     }
 
@@ -72,14 +72,16 @@ public class Project {
 
         public void register_users() {
         try {
-
+            connection = DriverManager.getConnection("jdbc:sqlite:project.db");
 
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter your name :");
+            System.out.println("Enter  name :");
             String name = scanner.nextLine();
-            System.out.println("Enter your password :");
+            System.out.println("Enter  password :");
             String password = scanner.nextLine();
-            String query = "INSERT INTO users (name, password) VALUES('" + name + "','" + password + "');";
+            System.out.println("Enter role");
+            String role = scanner.nextLine();
+            String query = "INSERT INTO users (name, password,role) VALUES('" + name + "','" + password + "', '"+role+"');";
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
             System.out.println("Rows added ");
@@ -108,6 +110,8 @@ public class Project {
                             role1 = rs.getString("role");
                             if (role1.equals("1")){
                                 student();
+                            }else if (role1.equals("2")){
+                                System.out.println(("hallo teacher"));
                             }
 
                         }
