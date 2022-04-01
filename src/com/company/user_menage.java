@@ -29,7 +29,8 @@ public class user_menage {
         System.out.println("1: Enter       2:Registration");
         choose = num.nextByte();
         if (choose == 1) {
-            enter_users();
+//            enter_users();
+            System.out.println("");
         }
         if (choose == 2) {
             register_users();
@@ -62,37 +63,6 @@ public class user_menage {
             System.out.println(e.getMessage());
         }
     }// добавляет логин и пароль в базу
-
-    public void enter_users() {
-        try {
-            Scanner check = new Scanner(System.in);
-            System.out.println("Enter your name: ");
-            String name = check.nextLine();
-            System.out.println("Enter your password");
-            String password = check.nextLine();
-            boolean isUserExist = false;
-            assert connection != null;
-            try (PreparedStatement ps = connection.prepareStatement("SELECT 1 FROM users WHERE name = ? and password = ?")) {
-                ps.setString(1, name);
-                ps.setString(2, password);
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        isUserExist = true;
-                    }
-                }
-            }
-            if (isUserExist) {
-                //studentsBody();
-                System.out.println("Your rang is student");
-
-
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }//Проверяет логин и пароль в базе данных
-
 
     }
 

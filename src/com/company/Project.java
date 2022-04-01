@@ -9,8 +9,8 @@ public class Project {
 
     public static void main(String[] args) {
         Project program = new Project();
-//        program.open();
-//        program.enter_users();
+        program.open();
+        program.enter_users();
         program.register_users();
         program.close();
 
@@ -81,7 +81,7 @@ public class Project {
             String password = scanner.nextLine();
             System.out.println("Enter role");
             String role = scanner.nextLine();
-            String query = "INSERT INTO users (name, password,role) VALUES('" + name + "','" + password + "', '"+role+"');";
+            String query = "INSERT INTO users (name, password,role) VALUES(" + name + "," + password + ", "+role+");";
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
             System.out.println("Rows added ");
@@ -96,22 +96,22 @@ public class Project {
         {
 
             try {
-                connection = DriverManager.getConnection("jdbc:sqlite:project.db");
+                connection = DriverManager.getConnection("jdbc:sqlite:dasrtan");
                 Scanner check = new Scanner(System.in);
                 System.out.println("Enter your name: ");
                 name = check.nextLine();
                 System.out.println("Enter password");
                 password = check.nextLine();
                 boolean isUserExist = false;
-                try (PreparedStatement ps = connection.prepareStatement("SELECT name, password, role FROM users WHERE name = '" + name + "' and password = '"+ password+"'")){
+                try (PreparedStatement ps = connection.prepareStatement("SELECT login, password, role FROM account WHERE name = '" + name + "' and password = '"+ password+"'")){
                     try (ResultSet rs = ps.executeQuery()) {
                         while (rs.next()){
                             String  role1;
                             role1 = rs.getString("role");
-                            if (role1.equals("1")){
-                                student();
-                            }else if (role1.equals("2")){
-                                System.out.println(("hallo teacher"));
+                            if (role1.equals("student")){
+                                student();//тут твоя ф-я
+                            }else if (role1.equals("teacher")){
+                                System.out.println(("hallo teacher"));//аналогично
                             }
 
                         }

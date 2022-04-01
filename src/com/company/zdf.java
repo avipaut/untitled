@@ -1,10 +1,6 @@
 package com.company;
-
-
 import java.sql.*;
 import java.util.Scanner;
-
-
 
 
 public class zdf {
@@ -15,6 +11,7 @@ public class zdf {
         program.open();
         program.delete_user();
         program.close();
+
     }
     static Connection connection;
 
@@ -27,7 +24,6 @@ public class zdf {
             System.out.println("Error");
         }
     }
-
     public void delete_user() {
 
         try {
@@ -55,7 +51,6 @@ public class zdf {
 
 
     public static void task() {
-
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
             Scanner check = new Scanner(System.in);
@@ -87,6 +82,8 @@ public class zdf {
             System.out.println(e.getMessage());
         }
     }//выводи задания заданные на определённую дату
+
+
     public void add_exam() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
@@ -106,8 +103,9 @@ public class zdf {
             System.out.println(e.getMessage());
         }
     }// добавляет логин и пароль в базу
-    public static void check_exam() {
 
+
+    public static void check_exam() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
             boolean isUserExist = false;
@@ -136,6 +134,4 @@ public class zdf {
             System.out.println(e.getMessage());
         }
     }//выводи задания заданные на определённую дату
-
-
 }

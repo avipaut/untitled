@@ -46,6 +46,7 @@ public class data_user {
                         }
                         if (rs.next()){
                             isUserExist = true;
+
                         }
                     }
                 }
@@ -54,6 +55,7 @@ public class data_user {
                 }
             }
             catch (Exception e){
+
                 System.out.println("Extension"+e);
             }
         }// Выводит все оценки из базы данных

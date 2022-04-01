@@ -44,7 +44,7 @@ public class Main {
             System.out.print("Enter students name: ");
             name = scanner.nextLine();
             System.out.println("""
-                    Enter subject:
+                    Enter subject
                     1.Math2
                     2.English2
                     3.SoftwareEngineering
