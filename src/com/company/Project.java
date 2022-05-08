@@ -10,8 +10,7 @@ public class Project {
     public static void main(String[] args) {
         Project program = new Project();
         program.open();
-        program.enter_users();
-        program.register_users();
+        enter_users();
         program.close();
 
     }
@@ -21,13 +20,14 @@ public class Project {
     void open() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
+            System.out.println("===== Enter =====");
+            enter_users();
 
         } catch (Exception ex) {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
             System.out.println("Error");
         }
-        System.out.println("===== Enter =====");
-        enter_users();
+
     }
 
     static void student() {
@@ -90,37 +90,43 @@ public class Project {
         }
     }
 
-    public void enter_users() {
-
+     public static String enter_users() {
         String name,password;
-        {
+
+        Scanner check = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+        name = "kirillll";
+        System.out.println("Enter password");
+        password = "123";
 
             try {
-                connection = DriverManager.getConnection("jdbc:sqlite:dasrtan");
-                Scanner check = new Scanner(System.in);
-                System.out.println("Enter your name: ");
-                name = check.nextLine();
-                System.out.println("Enter password");
-                password = check.nextLine();
+                connection = DriverManager.getConnection("jdbc:sqlite:project.db");
+
                 boolean isUserExist = false;
-                try (PreparedStatement ps = connection.prepareStatement("SELECT login, password, role FROM account WHERE name = '" + name + "' and password = '"+ password+"'")){
+                try (PreparedStatement ps = connection.prepareStatement("SELECT name, password, role FROM users WHERE name = '" + name + "' and password = '"+ password+"'")){
                     try (ResultSet rs = ps.executeQuery()) {
                         while (rs.next()){
-                            String  role1;
-                            role1 = rs.getString("role");
-                            if (role1.equals("student")){
-                                student();//тут твоя ф-я
-                            }else if (role1.equals("teacher")){
-                                System.out.println(("hallo teacher"));//аналогично
+                            int  role1;
+                            role1 = rs.getInt("role");
+                            if (role1 == 1){
+
+                                student();
+
+
                             }
 
+
                         }
+
                         if (rs.next()){
                             isUserExist = true;
 
                         }
                     }
+
                 }
+
+
 
 
                 if (isUserExist){
@@ -131,10 +137,11 @@ public class Project {
                 }
             }
             catch (Exception e){
-                System.out.println("sdasd");
+                System.out.println(e.getMessage());
             }
 
-        }
+
+        return name;
+    }
 
     }
-}

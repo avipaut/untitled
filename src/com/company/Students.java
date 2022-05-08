@@ -41,9 +41,8 @@ public class Students {
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-            Scanner check = new Scanner(System.in);
-            System.out.println("Enter your name: ");
-            String name = check.nextLine();
+
+            String name = Project.enter_users();
             boolean isUserExist = false;
             assert connection != null;
             try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, SoftwareEngineering, Logic, German FROM items WHERE students = '" + name + "'")){

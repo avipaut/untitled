@@ -28,9 +28,8 @@ public class data_user {
 
             try {
                 connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-                Scanner sc = new Scanner(System.in);
-                System.out.println("Enter your name: ");
-                String name = sc.nextLine();
+                System.out.println(Project.enter_users());
+                String name = Project.enter_users();
                 boolean isUserExist = false;
                 try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, SoftwareEngineering, Logic, German FROM items WHERE students = '" + name + "'")){
                     try (ResultSet rs = ps.executeQuery()) {
@@ -43,6 +42,7 @@ public class data_user {
                             German = rs.getString("German");
                             String name1 = rs.getString("students");
                             System.out.println(name1 + "\n" + "Math2: " + Math2 + "\n" + "English: " + English2 + "\n" + "SoftwareEngineering: " + SoftwareEngineering + "\n" +  "Logic: " + Logic + "\n" + "German: " + German);
+
                         }
                         if (rs.next()){
                             isUserExist = true;
