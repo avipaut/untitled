@@ -10,7 +10,6 @@ public class Project {
     public static void main(String[] args) {
         Project program = new Project();
         program.open();
-        enter_users();
         program.close();
 
     }
@@ -20,7 +19,7 @@ public class Project {
     void open() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-            System.out.println("===== Enter =====");
+
             enter_users();
 
         } catch (Exception ex) {
@@ -91,13 +90,12 @@ public class Project {
     }
 
      public static String enter_users() {
+        System.out.println("===== Enter =====");
         String name,password;
 
         Scanner check = new Scanner(System.in);
-        System.out.println("Enter your name: ");
-        name = "kirillll";
-        System.out.println("Enter password");
-        password = "123";
+        name = "Kirill";
+        password = "1";
 
             try {
                 connection = DriverManager.getConnection("jdbc:sqlite:project.db");
@@ -111,6 +109,7 @@ public class Project {
                             if (role1 == 1){
 
                                 student();
+                                break;
 
 
                             }
