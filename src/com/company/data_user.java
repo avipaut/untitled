@@ -28,10 +28,8 @@ public class data_user {
 
             try {
                 connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-                System.out.println(Project.enter_users());
-                String name = Project.enter_users();
                 boolean isUserExist = false;
-                try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, SoftwareEngineering, Logic, German FROM items WHERE students = '" + name + "'")){
+                try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, SoftwareEngineering, Logic, German FROM items WHERE students = '" + User.instance.getName() + "'")){
                     try (ResultSet rs = ps.executeQuery()) {
                         while (rs.next()){
                             String English2,SoftwareEngineering,Logic,Math2,German;

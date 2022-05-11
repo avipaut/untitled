@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/com/company/Dastan.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/company/Main.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/company/Project.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/company/Students.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/company/data_user.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/company/sdaf.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/company/zdf.java" dialect="GenericSQL" />
   </component>
 </project>

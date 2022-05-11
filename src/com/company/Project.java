@@ -54,6 +54,9 @@ public class Project {
         if (choose == 3) {
             zdf.task();
         }
+        if (choose == 8){
+            System.out.println("sd");
+        }
 
 
     }
@@ -89,32 +92,24 @@ public class Project {
         }
     }
 
-     public static String enter_users() {
+     public  void enter_users() {
         System.out.println("===== Enter =====");
-        String name,password;
-
-        Scanner check = new Scanner(System.in);
-        name = "Kirill";
-        password = "1";
-
+         User user = new User();
+         user.setName();
+         user.setPassword();
+         User.instance = user;
             try {
                 connection = DriverManager.getConnection("jdbc:sqlite:project.db");
 
                 boolean isUserExist = false;
-                try (PreparedStatement ps = connection.prepareStatement("SELECT name, password, role FROM users WHERE name = '" + name + "' and password = '"+ password+"'")){
+                try (PreparedStatement ps = connection.prepareStatement("SELECT name, password, role FROM users WHERE name = '" + user.getName() + "' and password = '"+ user.getPassword()+"'")){
                     try (ResultSet rs = ps.executeQuery()) {
                         while (rs.next()){
-                            int  role1;
-                            role1 = rs.getInt("role");
+                            int role1 = rs.getInt("role");
                             if (role1 == 1){
-
                                 student();
                                 break;
-
-
                             }
-
-
                         }
 
                         if (rs.next()){
@@ -122,12 +117,7 @@ public class Project {
 
                         }
                     }
-
                 }
-
-
-
-
                 if (isUserExist){
                     System.out.println();
 
@@ -140,7 +130,6 @@ public class Project {
             }
 
 
-        return name;
-    }
 
+    }
     }

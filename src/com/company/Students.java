@@ -42,10 +42,9 @@ public class Students {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
 
-            String name = Project.enter_users();
             boolean isUserExist = false;
-            assert connection != null;
-            try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, SoftwareEngineering, Logic, German FROM items WHERE students = '" + name + "'")){
+
+            try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, SoftwareEngineering, Logic, German FROM items WHERE students = '" + User.instance.getName() + "'")){
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()){
                         double Math2,English2,SoftwareEngineering,Logic,German;
