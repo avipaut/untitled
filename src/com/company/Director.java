@@ -1,8 +1,6 @@
 package com.company;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Director {
@@ -27,7 +25,7 @@ public class Director {
             director();
                 }
         if (choose == 2) {
-            task();
+            checkTeacher();
             director();
         }
         if (choose == 3) {
@@ -123,4 +121,37 @@ public class Director {
             System.out.println(e.getMessage());
         }
     }
+    public static void checkTeacher() {
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:project.db");
+
+            boolean isUserExist = false;
+            try (PreparedStatement ps = connection.prepareStatement("SELECT name FROM users WHERE role = 2")){
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()){
+                        String teacher = rs.getString("name");
+                        System.out.println(teacher);
+                    }
+
+                    if (rs.next()){
+                        isUserExist = true;
+
+                    }
+                }
+            }
+            if (isUserExist){
+                System.out.println();
+
+
+
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
+
+    }
+
 }

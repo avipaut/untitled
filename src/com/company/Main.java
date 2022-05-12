@@ -1,7 +1,7 @@
 package com.company;
 
 import java.sql.*;
-import java.util.Scanner;
+
 
 public class Main {
 
@@ -45,6 +45,9 @@ public class Main {
                         }
                         if (role1 ==2){
                             Teacher.teacher();
+                        }
+                        if (role1 ==3){
+                            Director.director();
                         }
                     }
 
