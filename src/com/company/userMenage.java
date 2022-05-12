@@ -5,10 +5,10 @@ import java.util.Scanner;
 
 
 
-public class user_menage {
+public class userMenage {
     public static void main(String[] args) {
 
-        user_menage program = new user_menage();
+        userMenage program = new userMenage();
         program.open();
         program.close();
     }

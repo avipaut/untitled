@@ -41,10 +41,10 @@ public class Students {
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-
             boolean isUserExist = false;
 
-            try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, SoftwareEngineering, Logic, German FROM items WHERE students = '" + User.instance.getName() + "'")){
+            try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, " +
+                    "SoftwareEngineering, Logic, German FROM items WHERE students = '" + User.instance.getName() + "'")){
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()){
                         double Math2,English2,SoftwareEngineering,Logic,German;
@@ -82,5 +82,5 @@ public class Students {
             avarage += Double.parseDouble(mark);
         }
         return avarage / marks.length;
-    }//Вычисляет среднее арифметическое значение dfdffd
+    }//Вычисляет среднее арифметическое значение
 }

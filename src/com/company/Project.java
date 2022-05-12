@@ -8,26 +8,13 @@ public class Project {
 
 
     public static void main(String[] args) {
-        Project program = new Project();
-        program.open();
-        program.close();
+        enter_users();
+        close();
 
     }
 
     static Connection connection;
 
-    void open() {
-        try {
-            connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-
-            enter_users();
-
-        } catch (Exception ex) {
-            System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
-            System.out.println("Error");
-        }
-
-    }
 
     static void student() {
 
@@ -46,7 +33,8 @@ public class Project {
         Scanner student = new Scanner(System.in);
         int choose = student.nextInt();
         if (choose == 1) {
-            data_user.select();
+            DataUser.select();
+            student();
         }
         if (choose == 2) {
             Students.select();
@@ -64,7 +52,7 @@ public class Project {
 
 
 
-    void close() {
+    static void close() {
         try {
             connection.close();
         } catch (Exception e) {
@@ -92,7 +80,7 @@ public class Project {
         }
     }
 
-     public  void enter_users() {
+     public static void enter_users() {
         System.out.println("===== Enter =====");
          User user = new User();
          user.setName();
@@ -102,7 +90,8 @@ public class Project {
                 connection = DriverManager.getConnection("jdbc:sqlite:project.db");
 
                 boolean isUserExist = false;
-                try (PreparedStatement ps = connection.prepareStatement("SELECT name, password, role FROM users WHERE name = '" + user.getName() + "' and password = '"+ user.getPassword()+"'")){
+                try (PreparedStatement ps = connection.prepareStatement("SELECT name, password, role FROM " +
+                        "users WHERE name = '" + user.getName() + "' and password = '"+ user.getPassword()+"'")){
                     try (ResultSet rs = ps.executeQuery()) {
                         while (rs.next()){
                             int role1 = rs.getInt("role");

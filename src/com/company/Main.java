@@ -1,8 +1,6 @@
 package com.company;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
@@ -11,10 +9,10 @@ public class Main {
 
         Main program = new Main();
         program.open();
-        program.marks();
+        enter_users();
         program.close();
 }
-    Connection connection;
+    static Connection connection;
 
     void open() {
 
@@ -27,6 +25,50 @@ public class Main {
         }
 
     }
+    public static void enter_users() {
+        System.out.println("===== Enter =====");
+        User user = new User();
+        user.setName();
+        user.setPassword();
+        User.instance = user;
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:project.db");
+
+            boolean isUserExist = false;
+            try (PreparedStatement ps = connection.prepareStatement("SELECT name, password, role FROM " +
+                    "users WHERE name = '" + user.getName() + "' and password = '"+ user.getPassword()+"'")){
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()){
+                        int role1 = rs.getInt("role");
+                        if (role1 == 1){
+                            Student.student();
+                        }
+                        if (role1 ==2){
+                            Teacher.teacher();
+                        }
+                    }
+
+                    if (rs.next()){
+                        isUserExist = true;
+
+                    }
+                }
+            }
+            if (isUserExist){
+                System.out.println();
+
+
+
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
+
+    }
+
     void close() {
         try {
             connection.close();
@@ -35,29 +77,5 @@ public class Main {
         }
     }
 
-    public void marks() {
 
-        try {
-            connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-            Scanner scanner = new Scanner(System.in);
-            String name,marks,subject;
-            System.out.print("Enter students name: ");
-            name = scanner.nextLine();
-            System.out.println("""
-                    Enter subject
-                    1.Math2
-                    2.English2
-                    3.SoftwareEngineering
-                    4.Logic
-                    5.German""");
-            subject = scanner.nextLine();
-            System.out.print("Enter marks: ");
-            marks = scanner.nextLine();
-            String query = "UPDATE items SET "+ subject +" = "+ subject +" || '," + marks + "' WHERE students = '" + name + "'";
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(query);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }//Добавляет оценки в выбранный предмет 
 }

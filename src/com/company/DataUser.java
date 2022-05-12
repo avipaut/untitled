@@ -1,11 +1,10 @@
 package com.company;
 
 import java.sql.*;
-import java.util.Scanner;
 
-public class data_user {
+public class DataUser {
     public static void main(String[] args) {
-        data_user program= new data_user();
+        DataUser program= new DataUser();
         program.open();
         select();
         program.close();
@@ -29,7 +28,9 @@ public class data_user {
             try {
                 connection = DriverManager.getConnection("jdbc:sqlite:project.db");
                 boolean isUserExist = false;
-                try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, SoftwareEngineering, Logic, German FROM items WHERE students = '" + User.instance.getName() + "'")){
+                try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2," +
+                        " SoftwareEngineering, Logic, German FROM items WHERE students = '" + User.instance.getName() +
+                        "'")){
                     try (ResultSet rs = ps.executeQuery()) {
                         while (rs.next()){
                             String English2,SoftwareEngineering,Logic,Math2,German;
@@ -39,7 +40,9 @@ public class data_user {
                             Logic = rs.getString("Logic");
                             German = rs.getString("German");
                             String name1 = rs.getString("students");
-                            System.out.println(name1 + "\n" + "Math2: " + Math2 + "\n" + "English: " + English2 + "\n" + "SoftwareEngineering: " + SoftwareEngineering + "\n" +  "Logic: " + Logic + "\n" + "German: " + German);
+                            System.out.println(name1 + "\n" + "Math2: " + Math2 + "\n" + "English: " + English2 + "\n" +
+                                    "SoftwareEngineering: " + SoftwareEngineering + "\n" +  "Logic: " + Logic + "\n" +
+                                    "German: " + German);
 
                         }
                         if (rs.next()){

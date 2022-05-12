@@ -40,7 +40,6 @@ public class zdf {
         }
     }// Удаляет пользователей
 
-
     void close() {
         try {
             connection.close();
@@ -57,7 +56,8 @@ public class zdf {
             System.out.println("Enter date: ");
             int date = check.nextInt();
             boolean isUserExist = false;
-            try (PreparedStatement ps = connection.prepareStatement("SELECT date, Math2, English2, SoftwareEngineering, Logic, German FROM task WHERE date = " + date + "")){
+            try (PreparedStatement ps = connection.prepareStatement("SELECT date, Math2, English2," +
+                    " SoftwareEngineering, Logic, German FROM task WHERE date = " + date + "")){
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()){
                         String English2,SoftwareEngineering,Logic,Math2,German;
@@ -67,7 +67,9 @@ public class zdf {
                         Logic = rs.getString("Logic");
                         German = rs.getString("German");
                         int date1 = rs.getInt("date");
-                        System.out.println("Задания на "+ date1 +" число"  + "\n" + "Math2: " + Math2 + "\n" + "English: " + English2 + "\n" + "SoftwareEngineering: " + SoftwareEngineering + "\n" +  "Logic: " + Logic + "\n" + "German: " + German);
+                        System.out.println("Задания на "+ date1 +" число"  + "\n" + "Math2: " + Math2 + "\n" +
+                                "English: " + English2 + "\n" + "SoftwareEngineering: " + SoftwareEngineering + "\n" +
+                                "Logic: " + Logic + "\n" + "German: " + German);
                     }
                     if (rs.next()){
                         isUserExist = true;
@@ -109,17 +111,20 @@ public class zdf {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
             boolean isUserExist = false;
-            try (PreparedStatement ps = connection.prepareStatement("SELECT date, Math2, English2, SoftwareEngineering, Logic, German FROM exam ")){
+            try (PreparedStatement ps = connection.prepareStatement("SELECT date, Math2, English2," +
+                    " SoftwareEngineering, Logic, German FROM exam ")){
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()){
-                        String English2,SoftwareEngineering,Logic,Math2,German;
+                        String English2,SoftwareEngineering,Logic,German,Math2;
                         Math2 = rs.getString("Math2");
                         English2 = rs.getString("English2");
                         SoftwareEngineering = rs.getString("SoftwareEngineering");
                         Logic = rs.getString("Logic");
                         German = rs.getString("German");
                         int date1 = rs.getInt("date");
-                        System.out.println("Рассписание экзаменов на "+ date1 +" число"  + "\n" + "Math2: " + Math2 + "\n" + "English: " + English2 + "\n" + "SoftwareEngineering: " + SoftwareEngineering + "\n" +  "Logic: " + Logic + "\n" + "German: " + German +  "\n" );
+                        System.out.println("Рассписание экзаменов на "+ date1 +" число"  + "\n" + "Math2: " + Math2 +
+                                "\n" + "English: " + English2 + "\n" + "SoftwareEngineering: " + SoftwareEngineering +
+                                "\n" +  "Logic: " + Logic + "\n" + "German: " + German +  "\n" );
                     }
                     if (rs.next()){
                         isUserExist = true;
