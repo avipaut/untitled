@@ -1,8 +1,5 @@
 package com.company;
-
 import java.sql.*;
-
-
 public class Main {
 
     public static void main(String[] args) {
@@ -10,21 +7,18 @@ public class Main {
         Main program = new Main();
         program.open();
         enter_users();
-        program.close();
+        close();
 }
     static Connection connection;
-
     void open() {
-
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-
         } catch (Exception ex) {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
             System.out.println("Error");
         }
-
     }
+
     public static void enter_users() {
         System.out.println("===== Enter =====");
         User user = new User();
@@ -41,44 +35,37 @@ public class Main {
                     while (rs.next()){
                         int role1 = rs.getInt("role");
                         if (role1 == 1){
+                            close();
                             Student.student();
                         }
                         if (role1 ==2){
+                            close();
                             Teacher.teacher();
                         }
                         if (role1 ==3){
+                            close();
                             Director.director();
                         }
                     }
-
                     if (rs.next()){
                         isUserExist = true;
-
                     }
                 }
             }
             if (isUserExist){
                 System.out.println();
-
-
-
             }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-
-
-
     }
 
-    void close() {
+    static void close() {
         try {
             connection.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
-
 }

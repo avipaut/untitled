@@ -7,6 +7,7 @@
     <file url="file://$PROJECT_DIR$/src/com/company/Project.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/company/Student.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/company/Students.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/company/Teacher.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/company/zdf.java" dialect="GenericSQL" />
   </component>
 </project>

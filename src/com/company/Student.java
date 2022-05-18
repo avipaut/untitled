@@ -5,12 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.*;
 import java.util.Scanner;
-
 public class Student {
     static Connection connection;
     static void student() {
-
-
         System.out.println("""
                 ===== Action =====
                 1.Список предметов
@@ -23,7 +20,7 @@ public class Student {
         Scanner student = new Scanner(System.in);
         int choose = student.nextInt();
         if (choose == 1) {
-            DataUser.select();
+            selectAverage();
             student();
         }
         if (choose == 2) {
@@ -41,11 +38,16 @@ public class Student {
         if (choose == 5){
             scoreCheck();
             student();
-        }if (choose == 6){
+        }
+        if (choose == 6){
+            minMarks();
+            student();
+        }
+        if (choose == 7){
             Main.enter_users();
         }
-
     }
+
     public static void checkExam() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
@@ -78,6 +80,7 @@ public class Student {
             System.out.println(e.getMessage());
         }
     }
+
     public static void scoreCheck() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
@@ -110,7 +113,6 @@ public class Student {
             System.out.println(e.getMessage());
         }
     }
-
 
     public static void task() {
         try {
@@ -148,23 +150,21 @@ public class Student {
         }
     }
 
-
-    public static void selectAvarage() {
+    public static void selectAverage() {
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
             boolean isUserExist = false;
 
-            try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, " +
-                    "SoftwareEngineering, Logic, German FROM items WHERE students = '" + User.instance.getName() + "'")){
+            try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2, SoftwareEngineering, Logic, German FROM items WHERE students = '" + User.instance.getName() + "'")){
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()){
                         double Math2,English2,SoftwareEngineering,Logic,German;
-                        Math2 = getAvarage(rs.getString("Math2"));
-                        English2 = getAvarage(rs.getString("English2"));
-                        SoftwareEngineering = getAvarage(rs.getString("SoftwareEngineering"));
-                        Logic = getAvarage(rs.getString("Logic"));
-                        German = getAvarage(rs.getString("German"));
+                        Math2 = getAverage(rs.getString("Math2"));
+                        English2 = getAverage(rs.getString("English2"));
+                        SoftwareEngineering = getAverage(rs.getString("SoftwareEngineering"));
+                        Logic = getAverage(rs.getString("Logic"));
+                        German = getAverage(rs.getString("German"));
                         String name1 = rs.getString("students");
                         System.out.println(name1 + "\n" + "Math1: " + String.format("%.1f",Math2) + "\n" + "English: " +
                                 String.format("%.1f",English2) + "\n" + "SoftwareEngineering: "
@@ -184,14 +184,13 @@ public class Student {
             System.out.println(e.getMessage());
         }
     }
+
     public static void select() {
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
             boolean isUserExist = false;
-            try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2," +
-                    " SoftwareEngineering, Logic, German FROM items WHERE students = '" + User.instance.getName() +
-                    "'")){
+            try (PreparedStatement ps = connection.prepareStatement("SELECT students, Math2, English2,SoftwareEngineering, Logic, German FROM items WHERE students = '" + User.instance.getName() + "'")){
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()){
                         String English2,SoftwareEngineering,Logic,Math2,German;
@@ -204,11 +203,9 @@ public class Student {
                         System.out.println(name1 + "\n" + "Math2: " + Math2 + "\n" + "English: " + English2 + "\n" +
                                 "SoftwareEngineering: " + SoftwareEngineering + "\n" +  "Logic: " + Logic + "\n" +
                                 "German: " + German);
-
                     }
                     if (rs.next()){
                         isUserExist = true;
-
                     }
                 }
             }
@@ -217,11 +214,47 @@ public class Student {
             }
         }
         catch (Exception e){
-
             System.out.println("Extension"+e);
         }
     }
-    static double getAvarage(String marksStr) {
+
+    public static void minMarks() {
+
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:project.db");
+            boolean isUserExist = false;
+
+            try (PreparedStatement ps = connection.prepareStatement("SELECT MIN(students, Math2, English2, " +
+                    "SoftwareEngineering, Logic, German) FROM items WHERE students = '" + User.instance.getName() + "'")){
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()){
+                        double Math2,English2,SoftwareEngineering,Logic,German;
+                        Math2 = getAverage(rs.getString("Math2"));
+                        English2 = getAverage(rs.getString("English2"));
+                        SoftwareEngineering = getAverage(rs.getString("SoftwareEngineering"));
+                        Logic = getAverage(rs.getString("Logic"));
+                        German = getAverage(rs.getString("German"));
+                        String name1 = rs.getString("students");
+                        System.out.println(name1 + "\n" + "Math1: " + String.format("%.1f",Math2) + "\n" + "English: " +
+                                String.format("%.1f",English2) + "\n" + "SoftwareEngineering: "
+                                + String.format("%.1f",SoftwareEngineering) + "\n" +  "Logic: " + String.format("%.1f",Logic)
+                                + "\n" + "German: " + String.format("%.1f",German));
+                    }
+                    if (rs.next()){
+                        isUserExist = true;
+                    }
+                }
+            }
+            if (isUserExist){
+                System.out.println("provlem");
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    static double getAverage(String marksStr) {
 
         String[] marks = marksStr.split(",");
         double avarage = 0;

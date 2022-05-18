@@ -23,7 +23,7 @@ public class Director {
         if (choose == 1) {
             allSubject();
             director();
-                }
+        }
         if (choose == 2) {
             checkTeacher();
             director();
@@ -89,14 +89,14 @@ public class Director {
     }
     public static void registerTeachers() {
         try {
-
+            connection = DriverManager.getConnection("jdbc:sqlite:project.db");
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter name :");
             String name = scanner.nextLine();
             System.out.println("Enter password :");
             String password = scanner.nextLine();
-            String query = "INSERT INTO users (name, password,role) VALUES('" + name + "','" + password + ",2');";
+            String query = "INSERT INTO users (name, password,role) VALUES('" + name + "','" + password + "',2);";
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
             System.out.println("Rows added ");
@@ -106,14 +106,13 @@ public class Director {
     }
     public static void registerStudents() {
         try {
-
-
+            connection = DriverManager.getConnection("jdbc:sqlite:project.db");
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter name :");
             String name = scanner.nextLine();
             System.out.println("Enter password :");
             String password = scanner.nextLine();
-            String query = "INSERT INTO users (name, password,role) VALUES('" + name + "','" + password + ",1');";
+            String query = "INSERT INTO users (name, password,role) VALUES('" + name + "','" + password + "',1);";
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
             System.out.println("Rows added ");
@@ -124,7 +123,6 @@ public class Director {
     public static void checkTeacher() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:project.db");
-
             boolean isUserExist = false;
             try (PreparedStatement ps = connection.prepareStatement("SELECT name FROM users WHERE role = 2")){
                 try (ResultSet rs = ps.executeQuery()) {
@@ -132,26 +130,17 @@ public class Director {
                         String teacher = rs.getString("name");
                         System.out.println(teacher);
                     }
-
                     if (rs.next()){
                         isUserExist = true;
-
                     }
                 }
             }
             if (isUserExist){
                 System.out.println();
-
-
-
             }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-
-
-
     }
-
 }
